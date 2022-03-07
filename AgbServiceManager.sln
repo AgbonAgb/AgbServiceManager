@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceManager.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceManager.Web", "ServiceManager.Web\ServiceManager.Web.csproj", "{351CFE82-5285-413F-8433-7F778CB44ABB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceManager.Data", "ServiceManager.Data\ServiceManager.Data.csproj", "{5BE3665D-69B6-41B2-9B21-A90EEC43C871}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{351CFE82-5285-413F-8433-7F778CB44ABB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{351CFE82-5285-413F-8433-7F778CB44ABB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{351CFE82-5285-413F-8433-7F778CB44ABB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BE3665D-69B6-41B2-9B21-A90EEC43C871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BE3665D-69B6-41B2-9B21-A90EEC43C871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BE3665D-69B6-41B2-9B21-A90EEC43C871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BE3665D-69B6-41B2-9B21-A90EEC43C871}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
