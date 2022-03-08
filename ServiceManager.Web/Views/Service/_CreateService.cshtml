@@ -1,0 +1,168 @@
+﻿@model ServiceManager.Web.ViewModels.ServiceViewModel
+@*
+    <h4>ServiceViewModel</h4>
+    <hr />*@
+<head>
+   
+    <script type="text/javascript">
+        //...
+        //$('.datepicker').datepicker({
+        //    format: 'dd/mm/yyyy', //choose the date format you prefer
+        //    language: "YOUR-LOCALE-CODE-HERE",
+        //    orientation: 'left bottom'
+        //});
+        //$(document).ready(function () {
+        //$('.datepicker').datepicker({
+        //    format: 'lll'
+        //});
+
+        //$(function () {
+        //    $('#SelectedDate').datepicker({
+        //        changeMonth: true,
+        //        changeYear: true,
+        //        format: "dd/mm/yyyy",
+        //        language: "tr"
+        //    });
+        //});
+    });
+    </script>
+  
+    </head>
+<div class="modal" id="CreateNew">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="UpdateCareerLabel">Create Service</h4>
+                <button type="button" class="close" data-dismiss="modal">
+                    <span>x</span>
+
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+                <form asp-action="CreateService" asp-controller="Service" method="post" role="form">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label asp-for="ServiceDesc" class="control-label"></label>
+                                <textarea asp-for="ServiceDesc" class="form-control"></textarea>
+                                <span asp-validation-for="ServiceDesc" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        @*<div class="col-md-8">
+                            </div>*@
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Company" class="control-label"></label>
+                                <input asp-for="Company" class="form-control" />
+                                <span asp-validation-for="Company" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Email" class="control-label"></label>
+                                <input asp-for="Email" class="form-control" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Status" class="control-label"></label>
+                                <select asp-for="Status" class="form-control">
+                                    <option>Active</option>
+                                    <option>Non Active</option>
+                                    </select>
+                                <span asp-validation-for="Status" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Daysnotification" class="control-label"></label>
+                                <input asp-for="Daysnotification" class="form-control" />
+                                <span asp-validation-for="Daysnotification" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Frequency" class="control-label"></label>
+                                <select asp-for="Frequency" class="form-control">
+                                    <option>Yearly</option>
+                                    <option>Monthly</option>
+                                </select>
+                                <span asp-validation-for="Frequency" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label asp-for="Enddate" class="control-label"></label>
+                                <input asp-for="Enddate" class="form-control" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                                <span asp-validation-for="Enddate" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label asp-for="Credentials" class="control-label"></label>
+                                <textarea asp-for="Credentials" class="form-control"></textarea>
+                                <span asp-validation-for="Credentials" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        @*<div class="col-md-8">
+
+                            </div>*@
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" value="Create" class="btn btn-primary" />
+                    </div>
+
+                </form>
+
+            </div>
+            @*<div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+@*<div class="row">
+    <div class="col-md-4">
+
+    </div>
+    </div>
+
+    <div>
+    <a asp-action="Index">Back to List</a>
+    </div>*@
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

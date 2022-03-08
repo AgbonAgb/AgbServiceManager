@@ -1,18 +1,183 @@
-html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
 body {
-  margin-bottom: 60px;
+    padding-top: 5px !important;
+    padding-bottom: 30px !important;
+    /*background-color:red !important;*/
+}
+
+
+
+.fade {
+    opacity: 100 !important;
+}
+
+
+h1 {
+  
+    font-size: 2em !important;
+}
+
+
+.navbar-collapse {
+    max-height: 50px !important;
+    
+}
+/*User logon name*/
+.navbar-nav {
+    float: right !important;
+
+}
+
+p.ex1 {
+    /* border: 1px solid red;*/
+    padding-top: 25px;
+}
+/*.navbar-vertical .navbar-nav .nav-link {
+    font-size: 16px !important;
+    font-weight: 500 !important;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}*/
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+.card-columns .card-body {
+    height: 100px;
+    font-family: 'Nunito',sans-serif;
+    background: #fbfafd;
+}
+
+.card-columns .card-img {
+    height: 300px;
+    vertical-align: bottom;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: .8;
+}
+
+.modal .card-img {
+    height: 500px;
+    vertical-align: bottom;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*opacity: .8;*/
+}
+.card-columns .card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(37,33,82,.12), 0 4px 8px rgba(37,33,82,.06);
+}
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+
+table td {
+    font-size: 12px !important;
+    word-wrap: break-word;
+    /*word-break: break-all;*/
+    white-space: normal !important;
+    /*white-space: initial;*/
+    text-align: justify;
+    width: auto;
+}
+table th {
+    border: 1px solid black !important;
+    font-size: 12px !important;
+   
+}
+/*
+.table-condensed {
+    font-size:9px;
+}*/
+.table-bordered {
+    /* font-size: 12px !important;*/
+    width: 100% !important;
+    table-layout: fixed;
+    white-space: nowrap;
+}
+/*.table .th .td {
+    background-color:brown;   
+    border: 0.5px solid black;
+    padding: 5px;*/
+    /*font-size: 20px;*/
+    /*font-size: 20em;
+    border-spacing: 5px;
+}*/
+/*table {
+     width: 100%;*/
+    /*max-width: 400px;*/
+    /*height: 240px;
+    margin: 0 auto;
+    display: block;
+    overflow-x: auto;
+    border-spacing: 10px;
+    font-size: 25px;
+}*/
+/*/*.tbody {
+    white-space: nowrap;
+}
+
+/*.th ,td {
+    padding: 5px 10px;
+    border-top-width: 0;
+    border-left-width: 0;
+}
+
+.th {
+    position: sticky;
+    top: 0;
+    background: #fff;
+    vertical-align: bottom;
+}*/
+/*.table.a {
+    table-layout: auto;
+    width: 180px;
+}
+
+.table.b {
+    table-layout: fixed;
+    width: 180px;
+}*/
+/*.table {
+    border-spacing: 15px;
+}*/
+.linkbutton {
+    border: none;
+    background: none;
+    color: blue;
+    text-decoration: underline;
+}
+
+    .linkbutton:hover {
+        cursor: pointer;
+    }
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+    .table-responsive {
+        font-size: 10px !important;
+    }
+    
 }

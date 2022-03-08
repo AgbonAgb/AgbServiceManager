@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceManager.Core", "Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceManager.Infrastructure", "ServiceManager.Infrastructure\ServiceManager.Infrastructure.csproj", "{5AC976D4-9B4F-4CF9-80CA-C68D8CB2F0BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceManager.Web", "ServiceManager.Web\ServiceManager.Web.csproj", "{351CFE82-5285-413F-8433-7F778CB44ABB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceManager.Web", "ServiceManager.Web\ServiceManager.Web.csproj", "{351CFE82-5285-413F-8433-7F778CB44ABB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceManager.Data", "ServiceManager.Data\ServiceManager.Data.csproj", "{5BE3665D-69B6-41B2-9B21-A90EEC43C871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceManager.Data", "ServiceManager.Data\ServiceManager.Data.csproj", "{5BE3665D-69B6-41B2-9B21-A90EEC43C871}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2372A302-ECA8-40FA-B37D-417B676A9091}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
