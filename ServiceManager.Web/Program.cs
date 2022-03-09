@@ -5,12 +5,19 @@ using ServiceManager.Data;
 using ServiceManager.Data.Entities;
 using System.Configuration;
 using AutoMapper;
+using Hangfire;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var connection = builder.Configuration.GetConnectionString("Cnn");
+//Hang fire below
+//var connectString = builder.Configuration.GetConnectionString("Cnn");
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection));
+builder.Services.AddHangfireServer();
+
+
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddScoped<IGenRepo<Service,int>, ServiceRepo>();
@@ -32,6 +39,10 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 
 app.UseRouting();
+//use this for gb
+app.UseHangfireDashboard();
+RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(30));
+
 
 app.UseAuthorization();
 

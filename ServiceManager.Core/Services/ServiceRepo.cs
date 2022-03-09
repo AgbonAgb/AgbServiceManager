@@ -62,11 +62,33 @@ namespace ServiceManager.Core.Services
 
         }
 
+        public void MonitorServiceAlert()
+        {
+            Console.WriteLine("Hang Fire is here");
+        }
+
+        public async Task<IEnumerable<Service>> SearchItem(string desc)
+        {
+            var itm= (IEnumerable<Service>)null;
+            try
+            {
+                itm = await _appDbContext.Services.Where(x => x.ServiceDesc.Contains(desc)).ToListAsync();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return itm; 
+        }
+
         public async Task<bool> Update(Service entity)
         {
             bool rtn = false;
-            var exp = await _appDbContext.Services.Where(x => x.Srn == entity.Srn).FirstOrDefaultAsync();
-            if (exp == null)
+            //var exp = await _appDbContext.Services.Where(x => x.Srn == entity.Srn).FirstOrDefaultAsync();
+            var exp = await _appDbContext.Services.FindAsync(entity.Srn);//.Where(x => x.Srn == entity.Srn).FirstOrDefaultAsync();
+            if (exp != null)
             {
                 exp.ServiceDesc= entity.ServiceDesc;    
                 exp.Company= entity.Company;    
@@ -77,6 +99,8 @@ namespace ServiceManager.Core.Services
                 exp.SetupBy=entity.SetupBy;
                 exp.ContactStaff=entity.ContactStaff;   
                 exp.Enddate=entity.Enddate; 
+                exp.Status=entity.Status;   
+
 
 
                  _appDbContext.Update(exp);

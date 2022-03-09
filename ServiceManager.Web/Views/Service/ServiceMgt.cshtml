@@ -8,9 +8,22 @@
 <head>
     <script src="~/js/site.js"></script>
 </head>
-<p>
-    @* <a asp-action="Create">Create New</a>*@
-</p>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form asp-controller="Service" asp-action="ServiceSearch" method="get">
+            <div class="row">
+                <div class="col-md-7">
+                    @*<p> *@                      
+                        <input type="text" name="SearchString" id="SearchString" placeholder="Search With Desc" />
+                    @*</p>*@
+                </div>
+                <div class="col-md-3">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 <div>
     @*<a asp-action="CreateService" asp-controller="Service">Create New</a>*@
     <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#CreateNew" data-url="@Url.Action($"CreateService")"> Create Service</button>
@@ -98,7 +111,7 @@
                                 @Html.DisplayFor(modelItem => item.Credentials)
                             </td>
                             <td>
-                                 <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#UpdateService" data-url="@Url.Action($"EditService/{item.Srn}")"> Edit</button>
+                                <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#UpdateService" data-url="@Url.Action($"EditService/{item.Srn}")"> Edit</button>
                                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
                                 @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
                             </td>

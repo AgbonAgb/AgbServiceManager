@@ -12,6 +12,8 @@ namespace ServiceManager.Core.Interfaces
         Task<bool> Update(T1 entity);
         Task<T1> GetById(T2 Id);
         Task<IEnumerable<T1>> GetAll();
+        Task<IEnumerable<T1>> SearchItem(string desc);
         Task<bool> Delete(T2 Id);
+        void MonitorServiceAlert();
     }
 }

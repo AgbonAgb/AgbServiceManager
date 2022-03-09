@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using ServiceManager.Core.Interfaces;
 using ServiceManager.Data.Entities;
 using ServiceManager.Web.ViewModels;
@@ -23,12 +24,30 @@ namespace ServiceManager.Web.Controllers
         }
         public async Task<IActionResult> ServiceMgt()
         {
+        //    var services = (IEnumerable<Service>)null;
+        //    var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
             //Service sv = new Service();
-            var services = await _genRepoService.GetAll();
+            if (TempData["SearchService"] != null)
+            {
+                var nservices= JsonConvert.DeserializeObject<IEnumerable<ServiceViewModel>>((string)TempData["SearchService"]);
+                //ViewData["SearchService"] = JsonConvert.DeserializeObject<IEnumerable<ServiceViewModel>>((string)TempData["SearchService"]);
+
+              // var nservices = ViewData["SearchService"] as ServiceManager.Web.ViewModels.ServiceViewModel;// BiodataTest.Models.Skills;
+                TempData["SearchService"] = null;
+                return View(nservices);
+            }
+            else
+            {
+                var services = await _genRepoService.GetAll();
+                var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
+                // return View(services);
+                return View(mapp);
+            }
+
+
+            
             //convert to viewmodel
-            var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
-            // return View(services);
-            return View(mapp);
+            
         }
 
         //CreateService
@@ -37,6 +56,8 @@ namespace ServiceManager.Web.Controllers
         {
             ServiceViewModel svm = new ServiceViewModel();
 
+           
+               // TempData["SearchService"] = JsonConvert.SerializeObject(mapp);
 
             //return Ok(_mapper.Map<IEnumerable<PlatformReadDtos>>(platformItems));
             //return View(svm);// create partial View
@@ -45,7 +66,7 @@ namespace ServiceManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateService([FromForm] ServiceViewModel svm)
         {
-
+            TempData["SearchService"] = null;
             if (ModelState.IsValid)
             {//var username = HttpContext.User.Identity.Name;
 
@@ -88,6 +109,7 @@ namespace ServiceManager.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EditService(int Id)
         {
+            TempData["SearchService"] = null;
             ServiceViewModel svm = new ServiceViewModel();
             var itm = await _genRepoService.GetById(Id);
             var mapp = _mapper.Map<ServiceViewModel>(itm);
@@ -99,6 +121,7 @@ namespace ServiceManager.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> EditService([FromForm] ServiceViewModel svm)
         {
+            TempData["SearchService"] = null;
 
             if (ModelState.IsValid)
             {//
@@ -111,7 +134,7 @@ namespace ServiceManager.Web.Controllers
                 bool rtn = await _genRepoService.Update(mapp);
                 if (rtn)
                 {
-                    Alert("Service Created successfully", NotificationType.success);
+                    Alert("Service Updated successfully", NotificationType.success);
                     var services = await _genRepoService.GetAll();
                     //display success messgae
 
@@ -135,6 +158,34 @@ namespace ServiceManager.Web.Controllers
             }
             //return Ok(_mapper.Map<IEnumerable<PlatformReadDtos>>(platformItems));
             //return View(svm);// create partial View
+
+        }
+        //ServiceSearch
+        [HttpGet]
+        public async Task<IActionResult> ServiceSearch(string SearchString)
+        {
+            var services = (IEnumerable<Service>)null;
+            var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
+
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+
+
+                services = await _genRepoService.SearchItem(SearchString);
+             
+
+
+                mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
+
+                TempData["SearchService"] = JsonConvert.SerializeObject(mapp);
+            }
+            else
+            {
+                TempData["SearchService"] = null;
+            }
+            //return RedirectToAction("ServiceMgt", mapp);
+            return RedirectToAction("ServiceMgt");
+
 
         }
     }
