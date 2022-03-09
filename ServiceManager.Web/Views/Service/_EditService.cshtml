@@ -1,38 +1,15 @@
 ﻿@model ServiceManager.Web.ViewModels.ServiceViewModel
-@*
-    <h4>ServiceViewModel</h4>
-    <hr />*@
-<head>
-   
-    <script type="text/javascript">
-        //...
-        //$('.datepicker').datepicker({
-        //    format: 'dd/mm/yyyy', //choose the date format you prefer
-        //    language: "YOUR-LOCALE-CODE-HERE",
-        //    orientation: 'left bottom'
-        //});
-        //$(document).ready(function () {
-        //$('.datepicker').datepicker({
-        //    format: 'lll'
-        //});
 
-        //$(function () {
-        //    $('#SelectedDate').datepicker({
-        //        changeMonth: true,
-        //        changeYear: true,
-        //        format: "dd/mm/yyyy",
-        //        language: "tr"
-        //    });
-        //});
-    });
-    </script>
-  
-    </head>
-<div class="modal" id="CreateNew">
+<h4>ServiceViewModel</h4>
+<hr />
+
+<div class="modal" id="UpdateService">
+
     <div class="modal-dialog">
+
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="UpdateCareerLabel">Create Service</h4>
+                <h4 class="modal-title" id="UpdateCareerLabel">Update Service</h4>
                 <button type="button" class="close" data-dismiss="modal">
                     <span>x</span>
 
@@ -41,8 +18,9 @@
             </div>
 
             <div class="modal-body">
-                <form asp-action="CreateService" asp-controller="Service" method="post" role="form">
+                <form asp-action="EditService" asp-controller="Service" method="post" role="form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input asp-for="Srn" class="form-control" hidden />                   
                     <div class="row">
                         <div class="col-md-10">
                             <div class="form-group">
@@ -80,7 +58,7 @@
                                 <select asp-for="Status" class="form-control">
                                     <option>Active</option>
                                     <option>Non Active</option>
-                                    </select>
+                                </select>
                                 <span asp-validation-for="Status" class="text-danger"></span>
                             </div>
                         </div>
@@ -109,7 +87,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Enddate" class="control-label"></label>
-                                <input asp-for="Enddate" type="date" class="form-control" asp-format="{0:yyyy-MM-ddTHH:mm}" />
+                                <input asp-for="Enddate" type="date" class="form-control"/>
                                 <span asp-validation-for="Enddate" class="text-danger"></span>
                             </div>
                         </div>
@@ -134,14 +112,10 @@
                     <div class="form-group">
                         <input type="submit" value="Create" class="btn btn-primary" />
                     </div>
-
                 </form>
 
             </div>
-            @*<div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-save="modal">Save</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-                </div>*@
+
         </div>
 
     </div>
@@ -151,18 +125,8 @@
 
 
 
-@*<div class="row">
-    <div class="col-md-4">
 
-    </div>
-    </div>
-
-    <div>
-    <a asp-action="Index">Back to List</a>
-    </div>*@
-
-@section Scripts {
-    @{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+@*@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+*@

@@ -61,5 +61,30 @@ namespace ServiceManager.Core.Services
 
 
         }
+
+        public async Task<bool> Update(Service entity)
+        {
+            bool rtn = false;
+            var exp = await _appDbContext.Services.Where(x => x.Srn == entity.Srn).FirstOrDefaultAsync();
+            if (exp == null)
+            {
+                exp.ServiceDesc= entity.ServiceDesc;    
+                exp.Company= entity.Company;    
+                exp.Frequency= entity.Frequency;    
+                exp.Email= entity.Email;    
+                exp.Daysnotification= entity.Daysnotification;  
+                exp.Credentials = entity.Credentials;   
+                exp.SetupBy=entity.SetupBy;
+                exp.ContactStaff=entity.ContactStaff;   
+                exp.Enddate=entity.Enddate; 
+
+
+                 _appDbContext.Update(exp);
+                await _appDbContext.SaveChangesAsync();
+                rtn = true;
+            }
+
+            return rtn;
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace ServiceManager.Web.ViewModels
         public DateTime Enddate { get; set; }
         public string Status { get; set; }
         [Display(Name = "Count Down Days")]
+        [Range(1, 100, ErrorMessage = "Count Down Days must be between greater than 0")]
         public int Daysnotification { get; set; }
         
         public string Frequency { get; set; }
@@ -27,9 +28,9 @@ namespace ServiceManager.Web.ViewModels
         [RegularExpression(@"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|""(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*"")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])",
            ErrorMessage = "The email address is not entered in a correct format")]
         public string Email { get; set; }
-        public string SetupBy { get; set; }
+        public string? SetupBy { get; set; }
         [Display(Name = "Contact Staff")]
-        public string ContactStaff { get; set; }
+        public string? ContactStaff { get; set; }
         [DataType(DataType.MultilineText)]
         public string Credentials { get; set; }
     }

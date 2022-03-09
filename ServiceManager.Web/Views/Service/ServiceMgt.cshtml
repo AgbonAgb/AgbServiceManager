@@ -1,13 +1,13 @@
-﻿@model IEnumerable<ServiceManager.Data.Entities.Service>
+﻿@model IEnumerable<ServiceManager.Web.ViewModels.ServiceViewModel>
 
 @*@{
     ViewData["Title"] = "ServiceMgt";
     }
 
     <h1>ServiceMgt</h1>*@
-    <head>
-        <script src="~/js/site.js"></script>
-    </head>
+<head>
+    <script src="~/js/site.js"></script>
+</head>
 <p>
     @* <a asp-action="Create">Create New</a>*@
 </p>
@@ -22,90 +22,90 @@
     <div class="panel-body">
         <div class="row">
             <table class="table-bordered">
-    <thead class="table th">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Srn)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ServiceDesc)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Company)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Enddate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Daysnotification)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Frequency)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SetupBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ContactStaff)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Credentials)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody class="table td">
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Srn)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ServiceDesc)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Company)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Enddate)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Daysnotification)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Frequency)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SetupBy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ContactStaff)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Credentials)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                <thead class="table th">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Srn)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ServiceDesc)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Company)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Enddate)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Daysnotification)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Frequency)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.SetupBy)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ContactStaff)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Credentials)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="table td">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Srn)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ServiceDesc)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Company)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Enddate)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Daysnotification)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Frequency)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.SetupBy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ContactStaff)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Credentials)
+                            </td>
+                            <td>
+                                 <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#UpdateService" data-url="@Url.Action($"EditService/{item.Srn}")"> Edit</button>
+                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
         </div>
     </div>

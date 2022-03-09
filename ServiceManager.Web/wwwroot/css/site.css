@@ -101,8 +101,8 @@ table td {
 }
 table th {
     border: 1px solid black !important;
-    font-size: 12px !important;
-   
+    /*font-size: 10px !important;
+    word-wrap: break-word !important;*/
 }
 /*
 .table-condensed {
@@ -113,6 +113,7 @@ table th {
     width: 100% !important;
     table-layout: fixed;
     white-space: nowrap;
+  
 }
 /*.table .th .td {
     background-color:brown;   
