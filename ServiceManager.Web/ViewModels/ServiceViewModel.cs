@@ -19,7 +19,7 @@ namespace ServiceManager.Web.ViewModels
         public DateTime Enddate { get; set; }
         public string Status { get; set; }
         [Display(Name = "Count Down Days")]
-        [Range(1, 100, ErrorMessage = "Count Down Days must be between greater than 0")]
+        [Range(1, 100, ErrorMessage = "Count Down Days must be between greater than 0")]       
         public int Daysnotification { get; set; }
         
         public string Frequency { get; set; }

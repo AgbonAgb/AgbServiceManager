@@ -1,7 +1,51 @@
 ﻿@model ServiceManager.Web.ViewModels.ServiceViewModel
 
-<h4>ServiceViewModel</h4>
-<hr />
+<head>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#submitBtn").click(function () {
+               var val = $('#Daysnotification').val();
+               if(val < 1)
+               {
+                   alert("Count down days must be greater than 1");
+                    return false;
+               }
+               else
+               {
+                 return true;
+               }
+              });
+
+               //var Startdate = $('#Enddate').val();
+               //alert("Selectec date must be today or in the feature");
+               //// var Startdate = new Date(document.getElementById("Enddate").value)
+               // var now = new Date();
+               // if (Startdate < now) {
+               //    alert("Selectec date must be today or in the feature");
+
+               //    return false;
+               // }
+               // else
+               // {
+               //  return true;
+               // }
+
+
+            //
+            //  $('#Enddate').datepicker(function () {
+            //        alert("Am heere");
+            //        startDate: new Date();
+            //});
+        //
+        });
+
+
+    </script>
+
+</head>
 
 <div class="modal" id="UpdateService">
 
@@ -20,7 +64,7 @@
             <div class="modal-body">
                 <form asp-action="EditService" asp-controller="Service" method="post" role="form">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input asp-for="Srn" class="form-control" hidden />                   
+                    <input asp-for="Srn" class="form-control" hidden />
                     <div class="row">
                         <div class="col-md-10">
                             <div class="form-group">
@@ -66,7 +110,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Daysnotification" class="control-label"></label>
-                                <input asp-for="Daysnotification" class="form-control" />
+                                <input asp-for="Daysnotification" id="Daysnotification" class="form-control" />
                                 <span asp-validation-for="Daysnotification" class="text-danger"></span>
                             </div>
                         </div>
@@ -87,7 +131,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label asp-for="Enddate" class="control-label"></label>
-                                <input asp-for="Enddate" type="date" class="form-control"/>
+                                <input asp-for="Enddate" type="date" class="form-control" />
                                 <span asp-validation-for="Enddate" class="text-danger"></span>
                             </div>
                         </div>
@@ -110,7 +154,7 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Create" class="btn btn-primary" />
+                        <input type="submit" id="submitBtn" value="Create" class="btn btn-primary" />
                     </div>
                 </form>
 

@@ -24,10 +24,23 @@
         </form>
     </div>
 </div>
-<div>
-    @*<a asp-action="CreateService" asp-controller="Service">Create New</a>*@
-    <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#CreateNew" data-url="@Url.Action($"CreateService")"> Create Service</button>
+<div class="row">
+    <div class="col-md-3">
+         <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#CreateNew" data-url="@Url.Action($"CreateService")"> Create Service</button>
+    </div>
+    <div class="col-md-3">
+        @*<a asp-action="UploadExcelService" asp-controller="Service">Upload Excell</a>*@
+         <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#UploadExcel" data-url="@Url.Action($"UploadExcelService")"> Upload Excel</button>
+    </div>
+    <div class="col-md-3">        
+         @*<button type="button" class="btn btn-primary" data-url="@Url.Action($"ViewDisabledServices")"> View Disabled Services</button>*@
+                  <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ViewDisabledServices", "Service")'" >View Disabled Services</button>
+    </div>
+    <div class="col-md-3">        
+         <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("ExportServices", "Service")'" >Export</button>
+    </div>
 </div>
+
 <div id="PlaceHolderHere"></div>
 
 <div class="panel panel-success">
@@ -61,7 +74,7 @@
                         <th>
                             @Html.DisplayNameFor(model => model.Email)
                         </th>
-                        <th>
+                       @* <th>
                             @Html.DisplayNameFor(model => model.SetupBy)
                         </th>
                         <th>
@@ -69,7 +82,7 @@
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.Credentials)
-                        </th>
+                        </th>*@
                         <th></th>
                     </tr>
                 </thead>
@@ -101,7 +114,7 @@
                             <td>
                                 @Html.DisplayFor(modelItem => item.Email)
                             </td>
-                            <td>
+                           @* <td>
                                 @Html.DisplayFor(modelItem => item.SetupBy)
                             </td>
                             <td>
@@ -109,11 +122,13 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Credentials)
-                            </td>
+                            </td>*@
                             <td>
-                                <button type="button" class="btn btn-primary" data-toggle="ajax-modal" data-target="#UpdateService" data-url="@Url.Action($"EditService/{item.Srn}")"> Edit</button>
-                                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                <button type="button" class="btn bg-primary" data-toggle="ajax-modal" data-target="#UpdateService" data-url="@Url.Action($"EditService/{item.Srn}")"> Edit/Disable</button>
+                                @* @Html.ActionLink("Edit2", "EditService", new { id = item.Srn }, new {@class = "ui-btn",data_toggle="ajax-modal", data-target="#UpdateService" })*@
+                                
+                                @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |*@
+                                @*@Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                             </td>
                         </tr>
                     }

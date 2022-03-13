@@ -97,7 +97,8 @@ table td {
     white-space: normal !important;
     /*white-space: initial;*/
     text-align: justify;
-    width: auto;
+    /*width: auto;*/
+  /*  column-width: auto !important;*/
 }
 table th {
     border: 1px solid black !important;
@@ -111,9 +112,8 @@ table th {
 .table-bordered {
     /* font-size: 12px !important;*/
     width: 100% !important;
-    table-layout: fixed;
-    white-space: nowrap;
-  
+    table-layout: fixed !important;
+    white-space: nowrap !important;
 }
 /*.table .th .td {
     background-color:brown;   

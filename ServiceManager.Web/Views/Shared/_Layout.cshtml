@@ -5,11 +5,11 @@
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Identity
 @*@using Microsoft.AspNetCore.Identity.EntityFrameworkCore
-@using BiodataTest.Data
+    @using BiodataTest.Data
 
-@inject SignInManager<ApplicationUser> SignInManager
-@inject IAuthorizationService hide
-@inject UserManager<ApplicationUser> UserManager*@
+    @inject SignInManager<ApplicationUser> SignInManager
+    @inject IAuthorizationService hide
+    @inject UserManager<ApplicationUser> UserManager*@
 @inject IHttpContextAccessor HttpContextAccessor
 
 
@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="~/assets/vendor/%40fortawesome/fontawesome-free/css/all.min.css" type="text/css">
     <!-- Page plugins -->
     <!-- Argon CSS -->
-   @* <link rel="stylesheet" href="~/assets/css/argon.mine209.css?v=1.0.0" type="text/css">*@
+    @* <link rel="stylesheet" href="~/assets/css/argon.mine209.css?v=1.0.0" type="text/css">*@
 
     <link rel="stylesheet" href="~/assets/css/argon.mine209.css" type="text/css">
     <link rel="stylesheet" href="~/css/site.css" type="text/css">
@@ -44,23 +44,8 @@
     <script src="~/sweetAlert/sweetalert.min.js"></script>
     <script src="~/js/ckeditor/ckeditor.js"></script>
 
+    
 
-
-
-
-
-    @* <script src="~/lib/jquery/jquery.js"></script>*@
-    <!-- Google Tag Manager -->
-    @*<script>
-        (function (w, d, s, l, i) {
-        w[l] = w[l] || []; w[l].push({
-        'gtm.start':
-        new Date().getTime(), event: 'gtm.js'
-        }); var f = d.getElementsByTagName(s)[0],
-        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-        '../../../../www.googletagmanager.com/gtm5445.html?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');</script>*@
-    <!-- End Google Tag Manager -->
 </head>
 
 <body>
@@ -101,7 +86,7 @@
                             <span class="nav-link-text">Home</span>
                             </a>
                             </li>*@
-                        
+
                         <li class="nav-item">
                             <a class="nav-link" href="#default" data-toggle="collapse" role="button" aria-expanded="false" aria-controls="default">
                                 <i class="ni ni-books text-blue"></i>
@@ -117,17 +102,17 @@
                                     </li>
                                     @*<li class="nav-item">
                                         <a asp-action="existedApplications" asp-controller="Career" class="nav-link">View Applications</a>
-                                    </li>
-                                    <li class="nav-item">
+                                        </li>
+                                        <li class="nav-item">
                                         <a asp-controller="Account" asp-action="RegisterUser" class="nav-link">Register User</a>
-                                    </li>*@
+                                        </li>*@
                                     @* <li class="nav-item">
                                         <a asp-controller="Home" asp-action="About" class="nav-link">About</a>
-                                    </li>*@
+                                        </li>*@
                                 </ul>
                             </div>
                         </li>
-                        
+
                     </ul>
                 </div>
             </div>
@@ -150,8 +135,8 @@
 
                         <div class="col-md-8"><h1 class="text-white">Service Monitoring</h1></div>
                         <ul class="navbar-nav align-items-center ml-md-auto">
-                        <div class="col-md-2"><a class="text-white" asp-controller="Home" asp-action="About">About</a></div>
-                           </ul>
+                            <div class="col-md-2"><a class="text-white" asp-controller="Home" asp-action="About">About</a></div>
+                        </ul>
                         <div class="col-md-2">
 
                             <ul class="navbar-nav align-items-center ml-md-auto">
@@ -170,14 +155,14 @@
                                         <i class="ni ni-zoom-split-in"></i>
                                     </a>
                                 </li>
-                                
+
                             </ul>
                             <ul class="navbar-nav align-items-center ml-auto ml-md-0">
-                                
+
                                 <li>
-                                   @* @await Component.InvokeAsync("ShoppingCartSummary")*@
+                                    @* @await Component.InvokeAsync("ShoppingCartSummary")*@
                                 </li>
-                                
+
                                 <li class="nav-item dropdown">
                                     <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="media align-items-center">
@@ -245,28 +230,28 @@
             </div> -->
         <!-- Page content -->
         <div class="container-fluid mt--6">
-                            @*<partial name="_login" />*@
-                            @*  <partial name="_CookieConsentPartial" />*@
+            @*<partial name="_login" />*@
+            @*  <partial name="_CookieConsentPartial" />*@
             <partial name="_NotificationPanel" />
 
 
-                            @*@Html.Partial("_NotificationPanel")*@
+            @*@Html.Partial("_NotificationPanel")*@
 
-                            @RenderBody()
+            @RenderBody()
 
-                            @*@if (User.Identity.IsAuthenticated)
-                                {
-                                <table class="table table-sm ">
-                                @foreach (var claim in User.Claims)
-                                {
-                                <tr>
-                                <td>@claim.Type</td>
-                                <td>@claim.Value</td>
-                                </tr>
-                                }
+            @*@if (User.Identity.IsAuthenticated)
+                {
+                <table class="table table-sm ">
+                @foreach (var claim in User.Claims)
+                {
+                <tr>
+                <td>@claim.Type</td>
+                <td>@claim.Value</td>
+                </tr>
+                }
 
-                                </table>
-                                }*@
+                </table>
+                }*@
             <partial name="_Loading" />
             <!-- Footer -->
             <footer class="footer pt-0">
@@ -282,20 +267,20 @@
         </div>
     </div>
     <!-- Agbon Added Scripts -->
-                    @* <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
-                    @* <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>*@
+    @* <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>*@
+    @* <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>*@
 
-                    @* <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
-                        <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>*@
-                    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>*@
+    @* <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+        <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>*@
+    @*<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>*@
     <script src="~/js/select2.min.js"></script>
-                    @*<script src="~/js/site.js"></script>*@
+    @*<script src="~/js/site.js"></script>*@
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" />
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/css/bootstrap.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/css/bootstrap-multiselect.css" />
-   <script type="text/javascript" src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/davidstutz/bootstrap-multiselect/master/dist/js/bootstrap-multiselect.js"></script>
 
     <!-- Core -->
     <script src="~/assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -309,7 +294,7 @@
     <script src="~/assets/vendor/chart.js/dist/Chart.extension.js"></script>
     <!-- Argon JS -->
     <script src="~/assets/js/argon.mine209.js?v=1.0.0"></script>
-    
+
 
     <script type="text/javascript">
         $(document).on('submit', 'form', function () {

@@ -15,7 +15,13 @@ var connection = builder.Configuration.GetConnectionString("Cnn");
 //Hang fire below
 //var connectString = builder.Configuration.GetConnectionString("Cnn");
 builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection));
-builder.Services.AddHangfireServer();
+//builder.Services.AddHangfireServer();
+builder.Services.AddHangfireServer(options =>
+{
+    options.Queues = new[] { "alpha", "beta", "default" };
+});
+
+
 
 
 
@@ -41,7 +47,13 @@ app.UseStaticFiles();
 app.UseRouting();
 //use this for gb
 app.UseHangfireDashboard();
+//Recurrent Job
 RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(30));
+//Fire and Forget
+//BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget Job Executed"));  
+//Dlayed
+//BackgroundJob.Schedule(() => Console.WriteLine("Delayed job executed"), TimeSpan.FromMinutes(1));  
+
 
 
 app.UseAuthorization();
