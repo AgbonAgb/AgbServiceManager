@@ -6,6 +6,8 @@ using ServiceManager.Data.Entities;
 using System.Configuration;
 using AutoMapper;
 using Hangfire;
+using ServiceManager.Infrastructure;
+using ServiceManager.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,7 +29,10 @@ builder.Services.AddHangfireServer(options =>
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddScoped<IGenRepo<Service,int>, ServiceRepo>();
+builder.Services.AddScoped<IEmailSender, EmailSenderServices>();
+//
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 //builder.Services.AddAutoMapper();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -48,7 +53,7 @@ app.UseRouting();
 //use this for gb
 app.UseHangfireDashboard();
 //Recurrent Job
-RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(30));
+RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(5));
 //Fire and Forget
 //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget Job Executed"));  
 //Dlayed

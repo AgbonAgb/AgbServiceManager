@@ -15,7 +15,16 @@
                 </button>
 
             </div>
-
+            <div class="row">
+                <div class="col-md-4">
+                    
+                    <a href="~/SampleExistingServices.xlsx">Download Template</a>
+                </div>
+                 <div class="col-md-4">
+                     @* <a href="~/SampleExistingServices.xlsx"></a>*@
+                </div>
+               
+            </div>
             <div class="modal-body">
                 <form asp-action="UploadExcelService" asp-controller="Service" method="post" role="form" enctype="multipart/form-data">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>

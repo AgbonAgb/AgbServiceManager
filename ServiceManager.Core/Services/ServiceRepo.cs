@@ -12,18 +12,21 @@ using System.Data.OleDb;
 using Microsoft.Extensions.Configuration;
 using System.Data;
 using ServiceManager.Infrastructure.Services;
+using ServiceManager.Infrastructure;
 
 namespace ServiceManager.Core.Services
 {
     public class ServiceRepo : IGenRepo<Service, int>
     {
         private readonly AppDbContext _appDbContext;
-       
+        private readonly IEmailSender _emailSender;
+
         //private IConfiguration _Configuration;
         // private readonly IWebHostEnvironment _webHostEnvironment;
-        public ServiceRepo(AppDbContext appDbContext)
+        public ServiceRepo(AppDbContext appDbContext, IEmailSender emailSender)
         {
             _appDbContext=appDbContext;
+            _emailSender=emailSender;   
             //_Configuration=Configuration;   
         }
         public async Task<bool> Create(Service entity)
@@ -85,9 +88,48 @@ namespace ServiceManager.Core.Services
 
         }
 
-        public void MonitorServiceAlert()
+        public async void MonitorServiceAlert()
         {
+            //monitor service exirations and send emails
             Console.WriteLine("Hang Fire is here");
+
+            CMail cm = null;
+            cm = new CMail();
+
+            cm.Subject = "Service Monitoring";
+            cm.AttachedFile = "";
+            // cm.ToEmail.Add(mail);
+
+
+            //cm.Body = body;
+            cm.DisplayName = "Service Monitor";// Ruser.UserName;// assets.Name;
+            cm.ComposedDate = DateTime.Now.ToLongDateString();
+
+            // brake email and loop
+            string em = "agbonwinn@yahoo.com";
+            cm.ToEmail.Add(em);
+            string Username ="Godwin";//= item[i].ToString().Trim();
+            //body = body.Replace("Dear Adewole", "Dear " + Username);
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine("Dear" + " " + Username + ",");
+            sb.AppendLine();
+            sb.AppendLine("Kindly note that the above service has count down days of");
+            sb.AppendLine();
+            //sb.AppendLine("Hopefully, we shall work together");
+
+
+            cm.Body = sb.ToString();// = body.Replace("Dear Adewole", "Dear " + Username);
+            bool semail = await _emailSender.sendPlainEmail(cm);
+            if (semail == true)
+            {
+                Console.WriteLine("Email Sent");
+            }
+            else
+            {
+                Console.WriteLine("Email not Sent");
+            }
+           // _logger.LogInformation("User created a new account with username " + Ruser.UserName);
+
         }
 
         public async Task<IEnumerable<Service>> SearchItem(string desc)

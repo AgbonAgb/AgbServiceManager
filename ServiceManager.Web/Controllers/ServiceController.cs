@@ -8,6 +8,10 @@ using ServiceManager.Infrastructure.Models;
 using ServiceManager.Web.ViewModels;
 using static ServiceManager.Web.Controllers.Common.Enum;
 using System.Web;
+using System.Data;
+using ClosedXML.Excel;
+using System.Text;
+using Microsoft.AspNetCore.Http;
 
 namespace ServiceManager.Web.Controllers
 {
@@ -317,40 +321,178 @@ namespace ServiceManager.Web.Controllers
 
         }
         //ExportServices
-        //public void Task<IActionResult> ExportServices()
+        public async Task<IActionResult> ExportServices()
+        {
+
+            DataTable dt = await exportexcel1();
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    wb.SaveAs(stream);
+                    return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+
+                }
+            }
+            ////string exportType = "excel";
+            ////switch(exportType.ToLower())
+            ////{
+            ////    case "excel":
+            ////    DataTable dt =   await exportexcel1();
+
+            ////        using (XLWorkbook wb = new XLWorkbook())
+            ////        {
+            ////            wb.Worksheets.Add(dt);
+            ////            using (MemoryStream stream = new MemoryStream())
+            ////            {
+            ////                wb.SaveAs(stream);
+            ////                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+
+            ////            }
+            ////        }
+            ////        break;
+
+
+            ////    //case "exportCsv()":
+            ////    //    //StringBuilder sb = new StringBuilder();
+            ////    //    // sb = await exportCsv();
+            ////    //    // Response.Clear();
+            ////    //    // Response.Buffer = true;
+            ////    //    // Response.Headers.Add("content-disposition", "attachment;filename=ProductDetails.csv");
+            ////    //    // //Response.Charset = "";
+            ////    //    // Response.ContentType = "application/text";
+            ////    //    // Response.ou.Write(sb.ToString());
+            ////    //    // //this.HttpContext.Response.Write(sb);
+            ////    //    // Response.Flush();
+            ////    //    // Response.End();
+            ////    //    break;
+
+            ////    //    //var inputStream = sb;// new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            ////    //    //var outputStream = this.Response.Body;
+            ////    //    //const int bufferSize = 1 << 10;
+            ////    //    //var buffer = new byte[bufferSize];
+            ////    //    //while (true)
+            ////    //    //{
+            ////    //    //    var bytesRead = inputStream.ReadAsync(buffer, 0, bufferSize);
+            ////    //    //    if (bytesRead == 0) break;
+            ////    //    //    await outputStream.WriteAsync(buffer, 0, bytesRead);
+            ////    //    //}
+            ////    //    //await outputStream.FlushAsync();
+
+
+
+            ////}
+
+
+
+        }
+
+        private async Task<DataTable> exportexcel1()
+        {
+            DataTable dt = new DataTable("Grid");
+
+
+            //List<Service> list = dt.ToList <Service>
+
+            dt.Columns.AddRange(new DataColumn[10] { new DataColumn("ServiceDesc"),
+                                        new DataColumn("Company"),
+                                        new DataColumn("Enddate"),
+                                        new DataColumn("Status"),
+                                        new DataColumn("Daysnotification"),
+                                        new DataColumn("Frequency"),
+                                        new DataColumn("Email"),
+                                        new DataColumn("SetupBy"),
+                                        new DataColumn("ContactStaff"),
+                                        new DataColumn("Credentials")});
+
+            // var customers = from customer in this.Context.Customers.Take(10)
+            //select customer;
+
+            var services = await _genRepoService.GetAll();
+
+            foreach (var service in services)
+            {
+                dt.Rows.Add(service.ServiceDesc, service.Company, service.Enddate, service.Status, service.Daysnotification, service.Frequency, service.Email, service.SetupBy, service.ContactStaff, service.Credentials);
+            }
+
+            return dt;
+        }
+
+        private async Task <StringBuilder> exportCsv()
+        {
+            DataTable dtProduct = await exportexcel1();// GetProductsDetail(pageNumber);
+
+            StringBuilder sb = new StringBuilder();
+
+            IEnumerable<string> columnNames = dtProduct.Columns.Cast<DataColumn>().
+                                              Select(column => column.ColumnName);
+            sb.AppendLine(string.Join(",", columnNames));
+
+            foreach (DataRow row in dtProduct.Rows)
+            {
+                IEnumerable<string> fields = row.ItemArray.Select(field =>
+                  string.Concat("\"", field.ToString().Replace("\"", "\"\""), "\""));
+                sb.AppendLine(string.Join(",", fields));
+            }
+            //Response.Clear();
+            //Response.Buffer = true;
+            //Response.AddHeader("content-disposition", "attachment;filename=ProductDetails.csv");
+            //Response.Charset = "";
+            //Response.ContentType = "application/text";
+            //Response.Output.Write(sb);
+            //Response.Flush();
+            //Response.End();
+
+            return sb;
+        }
+
+        //private async Task<FileContentResult> exportexcel()
         //{
-        //    //var services = await _genRepoService.GetAllDisabled();
-        //    //var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
-        //    //TempData["DisabledServices"] = JsonConvert.SerializeObject(mapp);
-        //    //// return View(services);
-        //    //return RedirectToAction("ServiceMgt");
+        //    //DataTable dt = new DataTable("Grid");
 
 
-        //    //convert to viewmodel
+        //    ////List<Service> list = dt.ToList <Service>
 
-        //    DataTable dt = new DataTable("Grid");
-        //    dt.Columns.AddRange(new DataColumn[4] { new DataColumn("CustomerId"),
-        //                                new DataColumn("ContactName"),
-        //                                new DataColumn("City"),
-        //                                new DataColumn("Country") });
+        //    //dt.Columns.AddRange(new DataColumn[10] { new DataColumn("ServiceDesc"),
+        //    //                            new DataColumn("Company"),
+        //    //                            new DataColumn("Enddate"),
+        //    //                            new DataColumn("Status"),
+        //    //                            new DataColumn("Daysnotification"),
+        //    //                            new DataColumn("Frequency"),
+        //    //                            new DataColumn("Email"),
+        //    //                            new DataColumn("SetupBy"),
+        //    //                            new DataColumn("ContactStaff"),
+        //    //                            new DataColumn("Credentials")});
 
-        //    var customers = from customer in this.Context.Customers.Take(10)
-        //                    select customer;
+        //    //// var customers = from customer in this.Context.Customers.Take(10)
+        //    ////select customer;
 
-        //    foreach (var customer in customers)
-        //    {
-        //        dt.Rows.Add(customer.CustomerID, customer.ContactName, customer.City, customer.Country);
-        //    }
+        //    //var services = await _genRepoService.GetAll();
 
-        //    using (XLWorkbook wb = new XLWorkbook())
-        //    {
-        //        wb.Worksheets.Add(dt);
-        //        using (MemoryStream stream = new MemoryStream())
-        //        {
-        //            wb.SaveAs(stream);
-        //            return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
-        //        }
-        //    }
+        //    //foreach (var service in services)
+        //    //{
+        //    //    dt.Rows.Add(service.ServiceDesc, service.Company, service.Enddate, service.Status, service.Daysnotification, service.Frequency, service.Email, service.SetupBy, service.ContactStaff, service.Credentials);
+        //    //}
+
+        //    //using (XLWorkbook wb = new XLWorkbook())
+        //    //{
+        //    //    wb.Worksheets.Add(dt);
+        //    //    using (MemoryStream stream = new MemoryStream())
+        //    //    {
+        //    //        wb.SaveAs(stream);
+        //    //        return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "Grid.xlsx");
+        //    //        // return File(stream.ToArray(), "application/pdf", "Grid.pdf");
+        //    //       // return File(stream.ToArray(), "application/text", "Grid.csv");
+        //    //        //application/text
+        //    //        //application/pdf
+        //    //    }
+        //    //}
+        //}
+
+        //private Task task exportexcel()
+        //{
 
         //}
     }
