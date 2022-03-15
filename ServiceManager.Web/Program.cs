@@ -33,6 +33,7 @@ builder.Services.AddScoped<IEmailSender, EmailSenderServices>();
 //
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<DefaultEmail>(builder.Configuration.GetSection("AdminEmail"));
 //builder.Services.AddAutoMapper();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
@@ -40,16 +41,24 @@ var app = builder.Build();
 
 
 
-
-
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+   
 }
 app.UseStaticFiles();
 
 app.UseRouting();
+
+//Migration
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    // use context
+    dbContext.Database.EnsureCreated();
+}
+
 //use this for gb
 app.UseHangfireDashboard();
 //Recurrent Job
@@ -69,23 +78,4 @@ app.MapControllerRoute(
 //pattern: "{controller=Home}/{action=Index}/{id?}");
 //ServiceMgt
 app.Run();
-////using System.Linq;
-////using System.Threading.Tasks;
 
-////namespace ServiceManager.Web.ViewModels
-////{
-////    public class Program
-////    {
-////        public static void Main(string[] args)
-////        {
-////            CreateHostBuilder(args).Build().Run();
-////        }
-
-////        public static IHostBuilder CreateHostBuilder(string[] args) =>
-////            Host.CreateDefaultBuilder(args)
-////                .ConfigureWebHostDefaults(webBuilder =>
-////                {
-////                    webBuilder.UseStartup<Startup>();
-////                });
-////    }
-////}
