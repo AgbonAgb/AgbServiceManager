@@ -247,48 +247,6 @@ namespace ServiceManager.Core.Services
             }
 
 
-            //}
-
-            //monitor service exirations and send emails
-            ////Console.WriteLine("Hang Fire is here");
-
-            ////CMail cm = null;
-            ////cm = new CMail();
-
-            ////cm.Subject = "Service Monitoring";
-            ////cm.AttachedFile = "";
-            ////// cm.ToEmail.Add(mail);
-
-
-            //////cm.Body = body;
-            ////cm.DisplayName = "Service Monitor";// Ruser.UserName;// assets.Name;
-            ////cm.ComposedDate = DateTime.Now.ToLongDateString();
-
-            ////// brake email and loop
-            ////string em = "agbonwinn@yahoo.com";
-            ////cm.ToEmail.Add(em);
-            ////string Username = "Godwin";//= item[i].ToString().Trim();
-            //////body = body.Replace("Dear Adewole", "Dear " + Username);
-            ////StringBuilder sb = new StringBuilder();
-            ////sb.AppendLine("Dear" + " " + Username + ",");
-            ////sb.AppendLine();
-            ////sb.AppendLine("Kindly note that the above service has count down days of");
-            ////sb.AppendLine();
-            //////sb.AppendLine("Hopefully, we shall work together");
-
-
-            ////cm.Body = sb.ToString();// = body.Replace("Dear Adewole", "Dear " + Username);
-            ////bool semail = await _emailSender.sendPlainEmail(cm);
-            ////if (semail == true)
-            ////{
-            ////    Console.WriteLine("Email Sent");
-            ////}
-            ////else
-            ////{
-            ////    Console.WriteLine("Email not Sent");
-            ////}
-            // _logger.LogInformation("User created a new account with username " + Ruser.UserName);
-
         }
 
         //private Task sendmailMonthly(string description, string title, string notificationEmail, string realdate, int days, string task, int taskid, DateTime nextanni, string company, Service cproj)
@@ -311,6 +269,7 @@ namespace ServiceManager.Core.Services
 
                     //update Db till next year
                     cproj.Enddate = nextanni;
+                    cproj.Daysnotification = 60; 
                     await Update(cproj);
 
                 }
