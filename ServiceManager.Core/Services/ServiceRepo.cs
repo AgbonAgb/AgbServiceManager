@@ -92,7 +92,7 @@ namespace ServiceManager.Core.Services
 
         }
 
-        public async void MonitorServiceAlert()
+        public async Task MonitorServiceAlert()
         {
             var exp = await _appDbContext.Services.Where(x => x.Status.ToLower() == "active").ToListAsync();
             //foreach(Service cproj in exp)

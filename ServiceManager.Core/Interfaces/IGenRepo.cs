@@ -16,7 +16,7 @@ namespace ServiceManager.Core.Interfaces
         Task<IEnumerable<T1>> GetAllDisabled();
         Task<IEnumerable<T1>> SearchItem(string desc);
         Task<bool> Delete(T2 Id);
-        void MonitorServiceAlert();
+        Task MonitorServiceAlert();
         Task UploadExcell(string filepath, string ext);
     }
 }
