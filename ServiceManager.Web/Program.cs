@@ -57,6 +57,7 @@ using (var scope = app.Services.CreateScope())
     var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
     // use context
     dbContext.Database.EnsureCreated();
+    dbContext.Database.Migrate();
 }
 
 //use this for gb
