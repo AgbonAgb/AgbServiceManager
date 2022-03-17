@@ -17,13 +17,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 //
-//builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly());
-var connection = builder.Configuration.GetConnectionString("Cnn");
+builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly());
+
 
 var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
 var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
 //Hang fire below
-//var connectString = builder.Configuration.GetConnectionString("Cnn");
+var connection = builder.Configuration.GetConnectionString("Cnn");
+var connectString = builder.Configuration.GetConnectionString("Cnn");
 builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection2));
 //builder.Services.AddHangfireServer();
 builder.Services.AddHangfireServer(options =>
