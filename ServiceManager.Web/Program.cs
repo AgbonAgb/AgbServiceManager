@@ -10,6 +10,7 @@ using ServiceManager.Infrastructure;
 using ServiceManager.Infrastructure.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Microsoft.Extensions.Configuration.UserSecrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -30,7 +31,7 @@ builder.Services.AddHangfireServer(options =>
     options.Queues = new[] { "alpha", "beta", "default" };
 });
 
-
+//
 
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection2));
