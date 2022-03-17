@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+//
 builder.Configuration.AddUserSecrets(Assembly.GetExecutingAssembly());
 var connection = builder.Configuration.GetConnectionString("Cnn");
 
