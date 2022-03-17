@@ -7,17 +7,20 @@ using Microsoft.Extensions.Options;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace ServiceManager.Infrastructure.Services
 {
     public class EmailSenderServices : IEmailSender
     {
         private readonly EmailSettings _emailSettings;
+        private readonly IConfiguration _configuration;
         private static string RegexMail;// =con Settings.Default.EmailMatchPattern;
-        public EmailSenderServices(IOptions<EmailSettings> emailSettings)
+        public EmailSenderServices(IOptions<EmailSettings> emailSettings, IConfiguration configuration)
         {
             //get SMTP details
             _emailSettings = emailSettings.Value;
+            _configuration = configuration;
         }
         public async Task<bool> sendPlainEmail(CMail cmail)
         {
@@ -25,6 +28,7 @@ namespace ServiceManager.Infrastructure.Services
             bool rtn = false;
             try
             {
+
                 //Builed The MSG
                 System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
                 foreach (string strTo in cmail.ToEmail)
@@ -58,8 +62,10 @@ namespace ServiceManager.Infrastructure.Services
                 msg.IsBodyHtml = false;
                 msg.Priority = MailPriority.High;
 
+                string Passw = this._configuration["Servicemanager:EmailPassword"];// "";//_emailSettings.EmailPassword
+
                 System.Net.Mail.SmtpClient mailclient = new System.Net.Mail.SmtpClient();
-                System.Net.NetworkCredential auth = new System.Net.NetworkCredential(_emailSettings.Sender, _emailSettings.Password);
+                System.Net.NetworkCredential auth = new System.Net.NetworkCredential(_emailSettings.Sender, Passw);
                 mailclient.Host = _emailSettings.MailServer;// SmtpServer;
                 mailclient.Port = _emailSettings.MailPort;//.Sender SmtpPort;
                 mailclient.UseDefaultCredentials = false;

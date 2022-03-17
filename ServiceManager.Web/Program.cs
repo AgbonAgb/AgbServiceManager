@@ -8,15 +8,18 @@ using AutoMapper;
 using Hangfire;
 using ServiceManager.Infrastructure;
 using ServiceManager.Infrastructure.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 var connection = builder.Configuration.GetConnectionString("Cnn");
+var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
+var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
 //Hang fire below
 //var connectString = builder.Configuration.GetConnectionString("Cnn");
-builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection));
+builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection2));
 //builder.Services.AddHangfireServer();
 builder.Services.AddHangfireServer(options =>
 {
@@ -26,14 +29,14 @@ builder.Services.AddHangfireServer(options =>
 
 
 
-
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection2));
 builder.Services.AddScoped<IGenRepo<Service,int>, ServiceRepo>();
 builder.Services.AddScoped<IEmailSender, EmailSenderServices>();
 //
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
 builder.Services.Configure<DefaultEmail>(builder.Configuration.GetSection("AdminEmail"));
+//builder.Services.Configure<EmailPassword>(EmailPassword);
 //builder.Services.AddAutoMapper();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

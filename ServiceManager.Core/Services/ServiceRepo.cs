@@ -197,17 +197,21 @@ namespace ServiceManager.Core.Services
 
                     //Not yearly monitor
                     string Staticdate = expyr.ToString("0000") + "-" + mnt.ToString("00") + "-" + dd.ToString("00");
-
+                    
 
                     DateTime yrdate;
                     DateTime yrdate2;
                     DateTime currdate = DateTime.Now;//.ToString("yyyy-MM-dd");
+                    //TimeSpan ts3 = yrdate2.Subtract(currdate);
                     if (DateTime.TryParse(realdate, out yrdate) && DateTime.TryParse(Staticdate, out yrdate2))
                     {
                         Console.WriteLine("Date Zone: " + Description + ", Event Date: " + EventDate);
                         TimeSpan ts = yrdate.Subtract(currdate.AddDays(-1));
                         TimeSpan ts2 = yrdate2.Subtract(currdate.AddDays(-1));
                         TimeSpan ts3 = yrdate2.Subtract(currdate);
+                        //test
+                       // await sendServiceMonitormail(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
+
                         //TimeSpan ts3 = currdate.Subtract(yrdate2);
                         //ts.Days = ts.Days + 1;
                         //ts2.Days = ts2.Days + 1;

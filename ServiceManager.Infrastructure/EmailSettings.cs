@@ -13,7 +13,7 @@ namespace ServiceManager.Infrastructure
         public int MailPort { get; set; }
         public string Sender { get; set; }
         public string SenderName { get; set; }
-        public string Password { get; set; }
+        public string EmailPassword { get; set; }
         public string Mfrom { get; set; }
         public string EmailMatchPattern { get; set; }
     }
