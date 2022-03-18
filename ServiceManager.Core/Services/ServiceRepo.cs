@@ -208,7 +208,7 @@ namespace ServiceManager.Core.Services
                         Console.WriteLine("Date Zone: " + Description + ", Event Date: " + EventDate);
                         TimeSpan ts = yrdate.Subtract(currdate.AddDays(-1));
                         TimeSpan ts2 = yrdate2.Subtract(currdate.AddDays(-1));
-                        TimeSpan ts3 = yrdate2.Subtract(currdate);
+                        TimeSpan ts3 = yrdate2.Subtract(currdate);//actual date - current date
                         //test
                        // await sendServiceMonitormail(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
 
@@ -233,14 +233,14 @@ namespace ServiceManager.Core.Services
 
                         if (Frequency.ToLower() == "monthly")
                         {
-                            if (cday >= 0)
-                            {
-                                if (cday <= CountDown)
+                            //if (cday >= 0)
+                            //{
+                                if (ts3.Days >= 0 && ts3.Days <= CountDown)
                                 {
                                  await  sendmailMonthly(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
                                     Console.WriteLine("File_Name " + Description);
                                 }
-                            }
+                            //}
 
                         }
 

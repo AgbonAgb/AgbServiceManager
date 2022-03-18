@@ -83,7 +83,7 @@ using (var scope = app.Services.CreateScope())
 //use this for gb
 app.UseHangfireDashboard();
 //Recurrent Job
-RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(5));
+RecurringJob.AddOrUpdate<IGenRepo<Service,int>>(x => x.MonitorServiceAlert(), Cron.HourInterval(24));
 //Fire and Forget
 //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget Job Executed"));  
 //Dlayed
