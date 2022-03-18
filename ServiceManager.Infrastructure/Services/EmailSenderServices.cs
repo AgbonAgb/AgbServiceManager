@@ -62,7 +62,7 @@ namespace ServiceManager.Infrastructure.Services
                 msg.IsBodyHtml = false;
                 msg.Priority = MailPriority.High;
 
-                string Passw = this._configuration["Servicemanager:EmailPassword"];// "";//_emailSettings.EmailPassword
+                string Passw = _emailSettings.EmailPassword;// this._configuration["Servicemanager:EmailPassword"];// "";//_emailSettings.EmailPassword
 
                 System.Net.Mail.SmtpClient mailclient = new System.Net.Mail.SmtpClient();
                 System.Net.NetworkCredential auth = new System.Net.NetworkCredential(_emailSettings.Sender, Passw);

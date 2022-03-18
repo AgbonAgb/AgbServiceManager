@@ -30,9 +30,9 @@ builder.Services.AddControllersWithViews();
 //Private IConfiguration _config;
 
 //var ho = configuration.GetConnectionString("Cnn");
-
-var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
-var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
+var connection2 = builder.Configuration.GetConnectionString("Cnn");
+//var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
+//var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
 //Hang fire below
 
 builder.Services.AddHangfire(x => x.UseSqlServerStorage(connection2));
