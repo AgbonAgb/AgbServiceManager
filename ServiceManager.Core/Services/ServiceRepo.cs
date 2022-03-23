@@ -14,6 +14,7 @@ using System.Data;
 using ServiceManager.Infrastructure.Services;
 using ServiceManager.Infrastructure;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Logging;
 
 namespace ServiceManager.Core.Services
 {
@@ -22,15 +23,18 @@ namespace ServiceManager.Core.Services
         private readonly AppDbContext _appDbContext;
         private readonly IEmailSender _emailSender;
         private readonly DefaultEmail _emailDeafult;
+        private readonly ILogger<ServiceRepo> _logger;
         //
 
         //private IConfiguration _Configuration;
         // private readonly IWebHostEnvironment _webHostEnvironment;
-        public ServiceRepo(AppDbContext appDbContext, IEmailSender emailSender, IOptions<DefaultEmail> emailDeafult)//DefaultEmail emailDeafult
+        public ServiceRepo(AppDbContext appDbContext, IEmailSender emailSender, IOptions<DefaultEmail> emailDeafult,
+           ILogger<ServiceRepo> logger)//DefaultEmail emailDeafult
         {
             _appDbContext = appDbContext;
             _emailSender = emailSender;
             _emailDeafult = emailDeafult.Value;
+            _logger = logger;
             //_Configuration=Configuration;   
         }
         public async Task<bool> Create(Service entity)
@@ -101,11 +105,15 @@ namespace ServiceManager.Core.Services
             int cnt = 0;
 
             cnt = exp.Count;
+           
             string date1 = DateTime.Now.ToString("yyyy-MM-dd");
             DateTime dt = Convert.ToDateTime(date1);
             DateTime nextanni = dt.AddYears(1);
 
-
+            if (cnt > 0)
+            {
+                _logger.LogInformation("Service monitoring ran for " + cnt.ToString() + "services at " + date1);
+            }
             string AdminMail1 =  _emailDeafult.AdminEmail;// Settings.Default.AdminMail1;
                                                           //"agbonwinn@yahoo.com";//                                           //string AdminMail2 = Settings.Default.Adminmail2;
 
@@ -249,7 +257,6 @@ namespace ServiceManager.Core.Services
                 }
                 //  Thread.Sleep(Settings.Default.SleepInterval);
             }
-
 
         }
 

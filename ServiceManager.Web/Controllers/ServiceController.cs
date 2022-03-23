@@ -39,9 +39,13 @@ namespace ServiceManager.Web.Controllers
         }
         public async Task<IActionResult> ServiceMgt()
         {
-        //    var services = (IEnumerable<Service>)null;
-        //    var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
+            //    var services = (IEnumerable<Service>)null;
+            //    var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
             //Service sv = new Service();
+
+           
+                _logger.LogInformation("Service Page visited");
+           
             if (TempData["SearchService"] != null || TempData["DisabledServices"] != null)
             {
                 if(TempData["SearchService"] != null)
