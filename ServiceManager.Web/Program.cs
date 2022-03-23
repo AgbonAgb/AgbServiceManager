@@ -16,11 +16,11 @@ using NLog;
 using Microsoft.Extensions.Logging;
 
 
-string filepath = "C:\\Logs";
-if (!System.IO.File.Exists(filepath))
-{
-    Directory.CreateDirectory(filepath);    
-}
+//string filepath = "C:\\Logs";
+//if (!System.IO.File.Exists(filepath))
+//{
+//    Directory.CreateDirectory(filepath);    
+//}
   //get this file
 var path = string.Concat(Directory.GetCurrentDirectory(), "\\NLog.config");
 var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
