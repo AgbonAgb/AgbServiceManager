@@ -16,12 +16,12 @@ using NLog;
 using Microsoft.Extensions.Logging;
 
 
-//string filepath = "C:\\Logs";
-//if (!System.IO.File.Exists(filepath))
-//{
-//    Directory.CreateDirectory(filepath);    
-//}
-  //get this file
+string filepath = "C:\\Logs";
+if (!System.IO.File.Exists(filepath))
+{
+    Directory.CreateDirectory(filepath);
+}
+//get this file
 var path = string.Concat(Directory.GetCurrentDirectory(), "\\NLog.config");
 var logger = NLog.Web.NLogBuilder.ConfigureNLog(path).GetCurrentClassLogger();
 
@@ -112,7 +112,7 @@ try
     //use this for gb
     app.UseHangfireDashboard();
     //Recurrent Job
-    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.HourInterval(24));
+    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.DayInterval(1));
     //Fire and Forget
     //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget Job Executed"));  
     //Dlayed
