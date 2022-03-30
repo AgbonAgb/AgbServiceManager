@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace ServiceManager.Infrastructure
 {
     public interface IEmailSender
-    {        Task<bool> sendPlainEmail(CMail cm);
+    {
+        Task<bool> sendPlainEmail(CMail cm);
         Task<bool> sendTemplatedEmail(CMail cm);
     }
 }
