@@ -61,8 +61,8 @@ try
 
     //var ho = configuration.GetConnectionString("Data source=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor");
    // string conn = "Server=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor";
-    //var connection2 = builder.Configuration.GetConnectionString("DefaultConnection");
-    var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
+    var connection2 = builder.Configuration.GetConnectionString("DefaultConnection");
+    //var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
     //var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
     //Hang fire below
 
