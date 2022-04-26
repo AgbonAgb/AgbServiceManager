@@ -105,7 +105,7 @@ namespace ServiceManager.Core.Services
             int cnt = 0;
 
             cnt = exp.Count;
-           
+            _logger.LogInformation("About running Service monitoring  for " + cnt.ToString());
             string date1 = DateTime.Now.ToString("yyyy-MM-dd");
             DateTime dt = Convert.ToDateTime(date1);
             DateTime nextanni = dt.AddYears(1);
