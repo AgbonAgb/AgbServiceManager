@@ -22,7 +22,7 @@ namespace ServiceManager.Data.Entities
         public string Email { get; set; }
         public string SetupBy { get; set; }       
         public string ContactStaff { get; set; }
-        [Column(TypeName = "nvarchar(max)")]
+        //[Column(TypeName = "nvarchar(max)")]
         public string Credentials { get; set; }
     }
 }

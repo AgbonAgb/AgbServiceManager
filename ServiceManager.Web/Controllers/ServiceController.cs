@@ -118,7 +118,8 @@ namespace ServiceManager.Web.Controllers
 
                     //convert to viewmodel
                     // var mapp = _mapper.Map<IEnumerable<ServiceViewModel>>(services);
-                    return PartialView("_CreateService", svm);
+                   // return PartialView("_CreateService", svm);
+                    return RedirectToAction("ServiceMgt");
                 }
                 else
                 {
@@ -134,6 +135,7 @@ namespace ServiceManager.Web.Controllers
             }
             else
             {
+                Alert("Something went wrong, service not created", NotificationType.error);
                 return PartialView("_CreateService", svm);
                 //return View("_CreateService", svm);
                 //return RedirectToPage("_CreateService", svm);

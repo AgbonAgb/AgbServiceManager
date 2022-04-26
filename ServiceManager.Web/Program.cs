@@ -14,6 +14,7 @@ using Microsoft.Extensions.Configuration.UserSecrets;
 using NLog.Web;
 using NLog;
 using Microsoft.Extensions.Logging;
+//using EFCoreMySQL.DBContexts;
 
 
 string filepath = "C:\\Logs";
@@ -60,8 +61,8 @@ try
 
     //var ho = configuration.GetConnectionString("Data source=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor");
    // string conn = "Server=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor";
-    var connection2 = builder.Configuration.GetConnectionString("DefaultConnection");
-    //var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
+    //var connection2 = builder.Configuration.GetConnectionString("DefaultConnection");
+    var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
     //var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
     //Hang fire below
 
@@ -76,6 +77,10 @@ try
 
 
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection2));
+    //mySql
+   // builder.Services.AddDbContextPool<AppDbContext>(options => options.UseMySql(connection2, ServerVersion.AutoDetect(connection2)));
+    //.ServerVersion(new Version(8, 0, 19), ServerType.MySql))
+
     builder.Services.AddScoped<IGenRepo<Service, int>, ServiceRepo>();
     builder.Services.AddScoped<IEmailSender, EmailSenderServices>();
     //
@@ -107,13 +112,15 @@ try
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
         // use context
         dbContext.Database.EnsureCreated();
-        dbContext.Database.Migrate();
+        //dbContext.Database.Migrate();
     }
 
     //use this for gb
     app.UseHangfireDashboard();
     //Recurrent Job
-    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.DayInterval(1));
+   // RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.DayInterval(1));
+
+
     //Fire and Forget
     //BackgroundJob.Enqueue(() => Console.WriteLine("Fire-and-forget Job Executed"));  
     //Dlayed
