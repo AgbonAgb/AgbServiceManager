@@ -118,7 +118,7 @@ try
     //use this for gb
     app.UseHangfireDashboard();
     //Recurrent Job
-   RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.DayInterval(1));
+   RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.Hourly(6));
 
 
     //Fire and Forget
