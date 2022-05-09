@@ -118,8 +118,8 @@ try
     //use this for gb
     app.UseHangfireDashboard();
     //Recurrent Job
-   RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.Daily());
-    //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.HourInterval(24));
+  //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.Daily());
+    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.HourInterval(12));
     //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(4));
 
 
