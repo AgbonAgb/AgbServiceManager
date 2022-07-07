@@ -358,6 +358,7 @@ namespace ServiceManager.Core.Services
                 if (semail == true)
                 {
                     Console.WriteLine("Email Sent");
+                    _logger.LogInformation($"Email Sent to----- {mail}");
                 }
                 else
                 {
@@ -462,6 +463,7 @@ namespace ServiceManager.Core.Services
                 if (semail == true)
                 {
                     Console.WriteLine("Email Sent");
+                    _logger.LogInformation($"Email Sent to----- {mail}");
                 }
                 else
                 {
