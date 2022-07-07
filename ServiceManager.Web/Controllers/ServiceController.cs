@@ -126,9 +126,9 @@ namespace ServiceManager.Web.Controllers
                     //logg error 
                     //display error message
                     Alert("Something went wrong, service not created", NotificationType.error);
-                    return PartialView("_CreateService", svm);
+                    //return PartialView("_CreateService", svm);
                     //return View("_CreateService", svm);
-                    
+                    return RedirectToAction("ServiceMgt");
                 }
 
 
@@ -136,7 +136,8 @@ namespace ServiceManager.Web.Controllers
             else
             {
                 Alert("Something went wrong, service not created", NotificationType.error);
-                return PartialView("_CreateService", svm);
+                return RedirectToAction("ServiceMgt");
+               // return PartialView("_CreateService", svm);
                 //return View("_CreateService", svm);
                 //return RedirectToPage("_CreateService", svm);
             }
@@ -179,7 +180,8 @@ namespace ServiceManager.Web.Controllers
 
             if (string.IsNullOrEmpty(ext) || !permittedExtensions.Contains(ext))
             {
-                return PartialView("_UploadExcel", CVM);
+                //return PartialView("_UploadExcel", CVM);
+                return RedirectToAction("ServiceMgt");
             }
             string uniqueFileName = await UploadedFile(CVM);
             string conStringExcel = this._Configuration.GetConnectionString("ExcelConString");
@@ -263,7 +265,8 @@ namespace ServiceManager.Web.Controllers
                     //display error message
                     Alert("Something went wrong, service not created", NotificationType.error);
                     //return PartialView("_CreateService", svm);
-                    return Redirect("/");
+                    //return Redirect("/");
+                    return RedirectToAction("ServiceMgt");
                     //return RedirectToAction("ServiceMgt", services);
                     //return RedirectToActionPermanent("_CreateService", svm);
                 }
@@ -278,7 +281,8 @@ namespace ServiceManager.Web.Controllers
                 {
                     ModelState.AddModelError("Error: ", error);
                 }
-                return PartialView("_CreateService", svm);
+                return RedirectToAction("ServiceMgt");
+               // return PartialView("_CreateService", svm);
                 //return RedirectToActionPermanent("_CreateService", svm);
             }
             //return Ok(_mapper.Map<IEnumerable<PlatformReadDtos>>(platformItems));

@@ -11,6 +11,7 @@ namespace ServiceManager.Data.Entities
     public class Service
     {
         [Key]
+        //public string Id { get; }=Guid.NewGuid().ToString();   
         public int Srn { get; set; }
         [StringLength(300)]
         public string ServiceDesc { get; set; }

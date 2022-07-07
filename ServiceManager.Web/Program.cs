@@ -60,8 +60,11 @@ try
     //Private IConfiguration _config;
 
     //var ho = configuration.GetConnectionString("Data source=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor");
-   // string conn = "Server=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor";
+    // string conn = "Server=10.12.201.66;user id=sa; Password=Test_test1;Database=ServiceMonitor";
     var connection2 = builder.Configuration.GetConnectionString("DefaultConnection");
+    //Specify size of inmemorry Cache
+    ////builder.Services.AddResponseCaching(x=>x.MaximumBodySize=1024);
+
     //var connection2 = builder.Configuration["Servicemanager:ConnectionString"];
     //var EmailPassword = builder.Configuration["Servicemanager:EmailPassword"];
     //Hang fire below
@@ -78,13 +81,15 @@ try
 
     builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection2));
     //mySql
-   // builder.Services.AddDbContextPool<AppDbContext>(options => options.UseMySql(connection2, ServerVersion.AutoDetect(connection2)));
+    // builder.Services.AddDbContextPool<AppDbContext>(options => options.UseMySql(connection2, ServerVersion.AutoDetect(connection2)));
     //.ServerVersion(new Version(8, 0, 19), ServerType.MySql))
 
     builder.Services.AddScoped<IGenRepo<Service, int>, ServiceRepo>();
     builder.Services.AddScoped<IEmailSender, EmailSenderServices>();
     //
     builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+    //Map Config to Objects
     builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
     builder.Services.Configure<DefaultEmail>(builder.Configuration.GetSection("AdminEmail"));
     //builder.Services.Configure<EmailPassword>(EmailPassword);
@@ -106,6 +111,7 @@ try
 
     app.UseRouting();
 
+
     //Migration
     using (var scope = app.Services.CreateScope())
     {
@@ -118,9 +124,10 @@ try
     //use this for gb
     app.UseHangfireDashboard();
     //Recurrent Job
-  //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.Daily());
-    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.HourInterval(12));
-    //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(4));
+    //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.Daily());
+    //RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), Cron.MinuteInterval(6));
+    RecurringJob.AddOrUpdate<IGenRepo<Service, int>>(x => x.MonitorServiceAlert(), "24* * * * *");//24 hours
+    //4 minutes =*/4 * * * *"
 
 
     //Fire and Forget
@@ -131,6 +138,23 @@ try
 
 
     app.UseAuthorization();
+    ////app.UseResponseCaching();
+    ////app.Use(async (context, next) =>
+
+    ////    {
+    ////        context.Response.GetTypedHeaders().CacheControl =
+    ////        new Microsoft.Net.Http.Headers.CacheControlHeaderValue()
+    ////        {
+    ////            Public = true,
+    ////            MaxAge = TimeSpan.FromSeconds(5)
+    ////        };
+
+    ////        context.Response.Headers[Microsoft.Net.Http.Headers.HeaderNames.Vary] = new string[] {"Accept-Encoding" };
+    ////        await next();
+    ////    }
+
+    ////    );
+
 
     app.MapControllerRoute(
         name: "default",
