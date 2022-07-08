@@ -92,7 +92,7 @@ namespace ServiceManager.Infrastructure.Services
             }
             catch (System.Net.Mail.SmtpException ex)
             {
-                _logger.LogError($"mail not sent for {ownerEmail}");
+                _logger.LogError($"mail not sent for {ownerEmail} ,{ex.Message}");
                 //Console.WriteLine(ex.Message, "Send Mail Error");
                 //if (ex.Message.ToLower().Contains("specified e-mail address is currently not supported") || ex.Message.ToLower().Contains("a recipient must be specified"))
                 //{
