@@ -8,6 +8,7 @@ using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace ServiceManager.Infrastructure.Services
 {
@@ -16,14 +17,17 @@ namespace ServiceManager.Infrastructure.Services
         private readonly EmailSettings _emailSettings;
         private readonly IConfiguration _configuration;
         private static string RegexMail;// =con Settings.Default.EmailMatchPattern;
-        public EmailSenderServices(IOptions<EmailSettings> emailSettings, IConfiguration configuration)
+        private readonly ILogger<EmailSenderServices> _logger;
+        public EmailSenderServices(IOptions<EmailSettings> emailSettings, IConfiguration configuration, ILogger<EmailSenderServices> logger)
         {
             //get SMTP details
             _emailSettings = emailSettings.Value;
             _configuration = configuration;
+            _logger = logger;
         }
         public async Task<bool> sendPlainEmail(CMail cmail)
         {
+            string ownerEmail = "";
             // errortype = "";
             bool rtn = false;
             try
@@ -31,6 +35,7 @@ namespace ServiceManager.Infrastructure.Services
 
                 //Builed The MSG
                 System.Net.Mail.MailMessage msg = new System.Net.Mail.MailMessage();
+              
                 foreach (string strTo in cmail.ToEmail)
                 {
                     //msg.To.Add(strTo.ToLower());
@@ -39,6 +44,7 @@ namespace ServiceManager.Infrastructure.Services
                         if (MailValid(strTo))
                         {
                             msg.To.Add(strTo.ToLower());
+                            ownerEmail = strTo.ToLower();
                         }
                     }
 
@@ -86,6 +92,7 @@ namespace ServiceManager.Infrastructure.Services
             }
             catch (System.Net.Mail.SmtpException ex)
             {
+                _logger.LogError($"mail not sent for {ownerEmail}");
                 //Console.WriteLine(ex.Message, "Send Mail Error");
                 //if (ex.Message.ToLower().Contains("specified e-mail address is currently not supported") || ex.Message.ToLower().Contains("a recipient must be specified"))
                 //{
