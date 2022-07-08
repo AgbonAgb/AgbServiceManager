@@ -149,7 +149,7 @@ namespace ServiceManager.Core.Services
             foreach (Service cproj in exp)
             {
 
-
+                _logger.LogInformation($"Looping Services for {exp.Count().ToString()} ");
                 Description = "";
                 EventDate = "";
                 CountDown = 0;
@@ -233,8 +233,9 @@ namespace ServiceManager.Core.Services
 
                             if (ts3.Days >= 0 && ts3.Days <= CountDown)
                             {
+                                _logger.LogInformation($"Enviroment Visited for yearly");
                                 //sendmail(Description, Title, NotificationEmail, realdate, ts.Days, task, taskid, nextanni);
-                              await  sendServiceMonitormail(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
+                                await  sendServiceMonitormail(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
 
                             }
                         }
@@ -245,7 +246,8 @@ namespace ServiceManager.Core.Services
                             //{
                                 if (ts3.Days >= 0 && ts3.Days <= CountDown)
                                 {
-                                 await  sendmailMonthly(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
+                                _logger.LogInformation($"Enviroment Visited for monthly");
+                                await  sendmailMonthly(Description, Title, NotificationEmail, realdate, ts3.Days, task, taskid, nextanni, Company, cproj);
                                     Console.WriteLine("File_Name " + Description);
                                 }
                             //}
@@ -358,11 +360,13 @@ namespace ServiceManager.Core.Services
                 if (semail == true)
                 {
                     Console.WriteLine("Email Sent");
-                    _logger.LogInformation($"Email Sent to----- {mail}");
+                    //_logger.LogInformation($"Email Sent to----- {mail}");
+                    _logger.LogInformation($"Email was Sent to----- {mail}, Description{Description}");
                 }
                 else
                 {
                     Console.WriteLine("Email not Sent");
+                    _logger.LogInformation($"Email was not Sent to----- {mail}, Description{Description}");
                 }
             }
             catch (Exception ex)
@@ -373,6 +377,7 @@ namespace ServiceManager.Core.Services
 
         private async Task sendmailMonthly(string Description, string Staff, string mail, string RealDate, int cday, string task, long taskid, DateTime nextanni, string Company, Service cproj)
         {
+           
             try
             {
                 StringBuilder sb = new StringBuilder();
@@ -463,11 +468,13 @@ namespace ServiceManager.Core.Services
                 if (semail == true)
                 {
                     Console.WriteLine("Email Sent");
-                    _logger.LogInformation($"Email Sent to----- {mail}");
+                   // _logger.LogInformation($"Email Sent to----- {mail}");
+                    _logger.LogInformation($"Email was Sent to----- {mail}, Description{Description}");
                 }
                 else
                 {
                     Console.WriteLine("Email not Sent");
+                    _logger.LogInformation($"Email was not Sent to----- {mail}, Description{Description}");
                 }
             }
             catch (Exception ex)
